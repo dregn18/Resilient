@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 import os
+import pytz
 
 # 1. Configuração da página
 st.set_page_config(
@@ -83,7 +84,8 @@ if 'trabalho_terminado' not in st.session_state:
     st.session_state.trabalho_terminado = False
 
 def registar_evento(atividade, altura):
-    agora = datetime.now()
+    tz_pt = pytz.timezone('Europe/Lisbon')
+    agora = datetime.now(tz_pt) # Captura a hora em Lisboa
     local = "Solo" if altura == 0 else "Poste"
     
     # === CORREÇÃO: Contagem de N separada por Sessão ===
